@@ -8,6 +8,8 @@ type FileMatcherIntentMatcher = Pick<RegExp, 'test'>;
 interface Options {
   compileAsModule: boolean;
   compileForElectron: boolean;
+  electronPath?: string;
+  compress: boolean;
   debugLifecycle: boolean;
   exclude?: FileMatcherIntent[];
   include?: FileMatcherIntent[];

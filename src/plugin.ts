@@ -20,6 +20,7 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
     this.options = {
       compileAsModule: true,
       compileForElectron: false,
+      compress: true,
       debugLifecycle: false,
       keepSource: false,
       preventSourceMaps: true,

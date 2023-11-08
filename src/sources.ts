@@ -9,7 +9,7 @@ import type { Options, Source } from './types';
 
 v8.setFlagsFromString('--no-lazy');
 
-async function compileSource(source: Source, options: Pick<Options, 'compileAsModule' | 'compileForElectron'>): Promise<Source> {
+async function compileSource(source: Source, options: Options): Promise<Source> {
   return await replaceSource(source, async raw => {
     // strips shebang or the compiled file may fail to run
     raw = raw.replace(shebangRegex, '');
@@ -19,8 +19,8 @@ async function compileSource(source: Source, options: Pick<Options, 'compileAsMo
     }
 
     return options.compileForElectron
-      ? await compileElectronCode(raw)
-      : compileCode(raw);
+      ? await compileElectronCode(raw, { electronPath: options.electronPath, compress: options.compress })
+      : compileCode(raw, options.compress);
   });
 }
 
