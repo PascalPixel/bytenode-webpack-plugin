@@ -62,7 +62,12 @@ function fromCompiledToTargetExtension(file: string): string {
 }
 
 function fromTargetToCompiledExtension(file: string): string {
-  return file.replace(TARGET_EXTENSION_REGEX, COMPILED_EXTENSION);
+  const dest = file.replace(TARGET_EXTENSION_REGEX, COMPILED_EXTENSION);
+  if (!dest.includes('.compiled.jsc')) {
+    const patchedDest = dest.replace('.compiled', '');
+    return patchedDest.replace('.jsc', '.compiled.jsc');
+  }
+  return dest;
 }
 
 function isCompiledExtension(file: string): boolean {
