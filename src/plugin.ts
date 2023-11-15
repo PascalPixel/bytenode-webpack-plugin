@@ -31,6 +31,17 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
     const logger = compiler.getInfrastructureLogger(this.name);
     setupLifecycleLogging(compiler, this.name, this.options);
 
+    if (this.options.compileForElectron) {
+      const target = compiler.options.target;
+      if (target) {
+        const targets = Array.isArray(target) ? target : [target];
+        if (!targets.some((target) => target.startsWith('electron-'))) {
+          logger.warn(`Not using bytenode because [${targets.join(', ')}] is marked as "compileForElectron: rue" but has "target: 'web'".`);
+          return;
+        }
+      }
+    }
+  
     logger.debug('original webpack.options.entry', compiler.options.entry);
 
     const { entries: { ignored, loaders, targets }, modules } = prepare(compiler);
