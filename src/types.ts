@@ -1,3 +1,4 @@
+import type { compileElectronCode } from 'bytenode';
 import type { ValuesType } from 'utility-types';
 import type { EntryNormalized, sources } from 'webpack';
 
@@ -8,6 +9,7 @@ type FileMatcherIntentMatcher = Pick<RegExp, 'test'>;
 interface Options {
   compileAsModule: boolean;
   compileForElectron: boolean;
+  compileForElectronOptions?: Parameters<typeof compileElectronCode>[1];
   debugLifecycle: boolean;
   exclude?: FileMatcherIntent[];
   include?: FileMatcherIntent[];

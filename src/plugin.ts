@@ -36,7 +36,7 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
       if (target) {
         const targets = Array.isArray(target) ? target : [target];
         if (!targets.some((target) => target.startsWith('electron-'))) {
-          logger.warn(`Not using bytenode because [${targets.join(', ')}] is marked as "compileForElectron: rue" but has "target: 'web'".`);
+          logger.warn(`Not using bytenode because [${targets.join(', ')}] is marked as "compileForElectron: true" but has "target: 'web'".`);
           return;
         }
       }
